@@ -9,9 +9,47 @@
  	height: 100%
  }
 
- .content {
- 	
+ #add_map_canvas {
+    height: 40%;
  }
+
+ .content {
+
+ }
+
+form#add_bathroom {
+    padding: 20px;
+}
+
+form#add_bathroom input, form#add_bathroom select {
+    padding: 5px;
+    font-size: 14px;
+    margin: 10px;
+}
+
+input.btn {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
 
  .sidebar {
  	height: 80%;

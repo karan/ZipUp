@@ -26,7 +26,7 @@ exports.addBathroom = function(req, res) {
         "name": req.body.bname,
         "floor": req.body.floor,
         "requirements": req.body.reqs,
-        "unisex": req.body.unisex,
+        "gender": req.body.gender,
         "stall_count": req.body.stall_count
     });
     console.log(newBathroom);
