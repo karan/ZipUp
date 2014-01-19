@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 //var Bathroom = require('./../models/bathroom');
 var Bathroom = mongoose.model('Bathroom');
+var Review = mongoose.model('Review');
 
 exports.index = function(req, res) {
     return res.send({'Start': 'Hello'});
@@ -47,4 +48,36 @@ exports.getBathroom = function(req, res) {
             console.log(err);
         }
     })
+}
+
+exports.getReviews = function(req, res) {
+    Review.find({"bathroom": req.params.bid}, function(err, result) {
+        if (!err) {
+            return res.json(result);
+        } else {
+            console.log(err)
+        }
+    });
+}
+
+exports.addReview = function(req, res) {
+    var newReview = new Review({
+        "rating": req.body.rating,
+        "cleanliness": req.body.clean,
+        "aroma": req.body.aroma,
+        "amenities": req.body.amenities,
+        "wait_time": req.body.wait_time,
+        "title": req.body.rtitle,
+        "review": req.body.review,
+        "bathroom": req.params.bid
+    });
+
+    newReview.save(function(err, review) {
+        if (!err) {
+            return console.log('created');
+        } else {
+            return console.log(err);
+        }
+    });
+    return res.send(newReview);
 }

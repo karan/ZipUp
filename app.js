@@ -37,7 +37,8 @@ app.get('/get/bathrooms/', routes.getAll); // get all bathrooms
 app.post('/add/bathroom', routes.addBathroom); // add a new bathroom
 app.get('/b/:id', routes.getBathroom); // get details about a bathroom
 
-app.post('/add/review/:id', routes.addReview); // post a new review at a post
+app.post('/add/review/:bid', routes.addReview); // post a new review at a post
+app.get('/get/reviews/:bid', routes.getReviews); // get reviews for a bathroom
 
 app.listen(8888);
 
