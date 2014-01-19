@@ -6,17 +6,19 @@
  	height: 100%; margin: 0; padding: 0
  }
  #map_canvas {
-    width: 70%;
+    width: 100%;
  	height: 100%
  }
 
  #add_map_canvas {
     height: 40%;
  }
-
- .content {
-
+ #add {
+    position: absolute;
+    bottom: 5px;
  }
+
+ .li {display:inline}
 
 form#add_bathroom {
     padding: 20px;
@@ -58,8 +60,8 @@ button, input.btn {
  	float: right;
  	margin-top: 20px;
  	background-clip: padding-box;
-	background-color: rgba(256,256,256,.9);
-	border: 5px solid transparent;
+	background-color: rgba(256,256,256, 1);
+	border: 5px solid gray;
 	border-radius: 10px;
     right: 10px;
 	min-height: 20px;
@@ -67,6 +69,7 @@ button, input.btn {
 	position: fixed;
 	top: 10px;
 	z-index: 10;
+    padding: 15px;
  }
 
 .button {

@@ -66,8 +66,6 @@ exports.addReview = function(req, res) {
         "cleanliness": req.body.clean,
         "aroma": req.body.aroma,
         "amenities": req.body.amenities,
-        "wait_time": req.body.wait_time,
-        "title": req.body.rtitle,
         "review": req.body.review,
         "bathroom": req.params.bid
     });

@@ -103,6 +103,7 @@ function showOnMap(position) {
             'Type: ' + type + '</p></div></div>';
           nearby.html = contentString;
           nearby.b_id = b_id;
+          nearby.b_data = data.bathrooms[i];
           markerArray.push(nearby);
         }
       }
@@ -112,18 +113,63 @@ function showOnMap(position) {
       google.maps.event.addListener(marker, 'click', (function (marker) {
         return function() {
           $('.one_review').remove();
+          $('#addReviewForm').remove();
           infowindow.setContent(marker.html);
           infowindow.open(map, marker);
           console.log(marker.b_id);
+          //map.setCenter(marker.position);
           $.get('/get/reviews/'+marker.b_id, function(data, status) {
-            //for (var reviewNum = 0; reviewNum < data.length; reviewNum++) {
-              //var review = data[reviewNum];
-              //console.log(review["review"]);
-              var allReviews = $('#allReviews');
-              $.each(data, function(){
-                allReviews.append('<p class="one_review">' + this["review"] + '</p>');
+            var allReviews = $('#allReviews');
+            $.each(data, function(){
+              allReviews.append('<p class="one_review">' + this["review"] + '</p>');
+            });
+            var newReviewForm = '<div id="review_stage" style="background-color:green;"></div>'+
+                                '<form id="addReviewForm">'+
+                                '<p><label for="rating">Overall rating:</label>'+
+                                  '<ul><li style="list-style:none;">'+
+                                      '<input type="radio" name="rating" value="1" /> 1'+
+                                      '<input type="radio" name="rating" value="2" /> 2'+
+                                      '<input type="radio" name="rating" value="3" /> 3'+
+                                      '<input type="radio" name="rating" value="4" /> 4'+
+                                      '<input type="radio" name="rating" value="5" /> 5'+
+                                    '</li></ul></p>'+
+                                '<p>'+
+                                  '<input type="checkbox" name="clean" id="clean_cb" value="0">'+
+                                  '<label for="clean_cb">Clean?</label>'+
+                                  '<input type="checkbox" name="smell" id="smell_cb" value="0">'+
+                                  '<label for="smell_cb">Smell good?</label>'+
+                                  '<input type="checkbox" name="amenities" id="amenities_cb" value="0">'+
+                                  '<label for="amenities_cb">Amenities stocked?</label>'+
+                                '</p>'+
+
+                                '<p><textarea rows="4" cols="30" id="detailreview"></textarea></p>'+
+                                '<input class="btn" type="submit" id="add_review_btn" text="Submit">'+
+                              '</form>'
+            $(allReviews).append(newReviewForm);
+              // $('input[name=rating]:checked').val()
+              // +$('#clean_cb').val()
+              $("#addReviewForm").submit(function(e) {
+              var formData = {
+                "rating": $('input[name=rating]:checked').val(),
+                "clean": +$('#clean_cb').val(),
+                "aroma": +$('#smell_cb').val(),
+                "amenities": +$('#amenities_cb').val(),
+                "review": $('#detailreview').val(),
+                "bid": marker.b_id
+              }
+
+              console.log(formData);
+
+              $.ajax({
+                type: "POST",
+                url: "/add/review/"+marker.b_id,
+                data: formData,
+                success: function() {
+                  $('#review_stage').html('<p>Done!</p>');
+                }
               });
-            //}
+              return false;
+            });
           })
         }
       })(marker));
