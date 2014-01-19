@@ -3,7 +3,10 @@
  }
 
  body {
- 	height: 100%; margin: 0; padding: 0
+ 	height: 100%; margin: 0;
+    font-family: sans-serif;
+    font-weight: 100;
+    color: #6F6F6F;
  }
  #map_canvas {
     width: 100%;
@@ -55,21 +58,26 @@ button, input.btn {
 }
 
  .sidebar {
- 	height: 80%;
+ 	height: 85%;
  	width: 25%;
  	float: right;
  	margin-top: 20px;
  	background-clip: padding-box;
-	background-color: rgba(256,256,256, 1);
-	border: 5px solid gray;
-	border-radius: 10px;
-    right: 10px;
+	background-color: rgba(256,256,256, 0.9);
+	border: 3px solid #EFEFEF;
+	border-radius: 15px;
+    right: 2%;
 	min-height: 20px;
 	min-width: 20px;
 	position: fixed;
 	top: 10px;
 	z-index: 10;
     padding: 15px;
+ }
+ li {
+    display: inline;
+list-style-type: none;
+padding-right: 5px;
  }
 
 .button {
@@ -117,19 +125,19 @@ button, input.btn {
 
 
 h1, h2, h3 {
-	margin: 0;
-	padding: 0;
-	text-transform: uppercase;
-	font-family: 'Varela Round', sans-serif;
-	font-weight: 300;
-	color: #2D2D2D;
+	font-family: sans-serif;
+	color: #444444;
+    font-weight: 200;
+}
+h3 {
+    color: #6F6F6F;
 }
 
-h2 {
-	padding: 0px 0px 30px 0px;
-	font-size: 2.50em;
+#addReviewForm {
+    border: 2px solid #EEEEEE;
+    border-radius: 10px;
+    padding: 10px;
 }
-
 
 
 

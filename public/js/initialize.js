@@ -112,35 +112,48 @@ function showOnMap(position) {
       var marker = markerArray[i];
       google.maps.event.addListener(marker, 'click', (function (marker) {
         return function() {
+          $('#welcome').remove();
           $('.one_review').remove();
           $('#addReviewForm').remove();
+          document.getElementById("allReviews").innerHTML = "";
           infowindow.setContent(marker.html);
           infowindow.open(map, marker);
           console.log(marker.b_id);
           //map.setCenter(marker.position);
           $.get('/get/reviews/'+marker.b_id, function(data, status) {
             var allReviews = $('#allReviews');
+            var total = 0.0;
+            var count = 0;
             $.each(data, function(){
+              total += this["rating"];
+              count++;
               allReviews.append('<p class="one_review">' + this["review"] + '</p>');
             });
+            var rating = total / count;
+            if (count > 0) {
+              allReviews.prepend('<p>Average Rating: ' + rating.toFixed(1) + '</p>');
+            } else {
+              allReviews.prepend('<p>No reviews... yet!</p>');
+            }
+
             var newReviewForm = '<div id="review_stage" style="background-color:green;"></div>'+
                                 '<form id="addReviewForm">'+
-                                '<p><label for="rating">Overall rating:</label>'+
-                                  '<ul><li style="list-style:none;">'+
-                                      '<input type="radio" name="rating" value="1" /> 1'+
-                                      '<input type="radio" name="rating" value="2" /> 2'+
-                                      '<input type="radio" name="rating" value="3" /> 3'+
-                                      '<input type="radio" name="rating" value="4" /> 4'+
-                                      '<input type="radio" name="rating" value="5" /> 5'+
-                                    '</li></ul></p>'+
-                                '<p>'+
+                                '<label for="rating">Overall rating:</label>'+
+                                  '<ul><li>'+
+                                      '<input type="radio" name="rating" value="1" /> 1</li>'+
+                                      '<li><input type="radio" name="rating" value="2" /> 2</li>'+
+                                      '<li><input type="radio" name="rating" value="3" /> 3</li>'+
+                                      '<li><input type="radio" name="rating" value="4" /> 4</li>'+
+                                      '<li><input type="radio" name="rating" value="5" /> 5'+
+                                    '</li></ul>'+
+                                ''+
                                   '<input type="checkbox" name="clean" id="clean_cb" value="0">'+
-                                  '<label for="clean_cb">Clean?</label>'+
+                                  '<label for="clean_cb">Clean</label><br>'+
                                   '<input type="checkbox" name="smell" id="smell_cb" value="0">'+
-                                  '<label for="smell_cb">Smell good?</label>'+
+                                  '<label for="smell_cb">No smell</label><br>'+
                                   '<input type="checkbox" name="amenities" id="amenities_cb" value="0">'+
-                                  '<label for="amenities_cb">Amenities stocked?</label>'+
-                                '</p>'+
+                                  '<label for="amenities_cb">Amenities stocked</label><br>'+
+                                ''+
 
                                 '<p><textarea rows="4" cols="30" id="detailreview"></textarea></p>'+
                                 '<input class="btn" type="submit" id="add_review_btn" text="Submit">'+
