@@ -5,22 +5,22 @@ var newReviewForm = '<div id="review_stage" style="background-color:green;"></di
                                 '<form id="addReviewForm">'+
                                 '<label for="rating">Overall rating:</label>'+
                                   '<ul><li>'+
-                                      '<input type="radio" name="rating" value="1" /> 1</li>'+
+                                      '<input type="radio" name="rating" value="1" required/> 1</li>'+
                                       '<li><input type="radio" name="rating" value="2" /> 2</li>'+
                                       '<li><input type="radio" name="rating" value="3" /> 3</li>'+
                                       '<li><input type="radio" name="rating" value="4" /> 4</li>'+
                                       '<li><input type="radio" name="rating" value="5" /> 5'+
                                     '</li></ul>'+
                                 ''+
-                                  '<input type="checkbox" name="clean" id="clean_cb" value="0">'+
+                                  '<input type="checkbox" name="clean" id="clean_cb" value="0" >'+
                                   '<label for="clean_cb">Clean</label><br>'+
-                                  '<input type="checkbox" name="smell" id="smell_cb" value="0">'+
+                                  '<input type="checkbox" name="smell" id="smell_cb" value="0" >'+
                                   '<label for="smell_cb">No smell</label><br>'+
-                                  '<input type="checkbox" name="amenities" id="amenities_cb" value="0">'+
+                                  '<input type="checkbox" name="amenities" id="amenities_cb" value="0" >'+
                                   '<label for="amenities_cb">Amenities stocked</label><br>'+
                                 ''+
 
-                                '<p><textarea rows="4" cols="30" id="detailreview"></textarea></p>'+
+                                '<p><textarea rows="4" cols="30" id="detailreview" required></textarea></p>'+
                                 '<input class="btn" type="submit" id="add_review_btn" text="Submit">'+
                               '</form>';
 
@@ -144,6 +144,7 @@ function showOnMap(position) {
           //map.setCenter(marker.position);
           $.get('/get/reviews/'+marker.b_id, function(data, status) {
             var allReviews = $('#allReviews');
+            $(allReviews).show();
             var total = 0.0;
             var count = 0;
             $.each(data, function(){
@@ -162,8 +163,15 @@ function showOnMap(position) {
 
               $(allReviews).append(newReviewForm);
 
-
+              if (count > 3) {
+                $(allReviews).append('<button id="add_your" onclick="reviewForm()">Add your review</button>');
+                $('#addReviewForm').hide();
+              }
               $("#addReviewForm").submit(function(e) {
+                if ($('input[name=rating]:checked').val() == undefined ||
+                  $('#detailreview').val() == "") {
+                  return false;
+                }
               var formData = {
                 "rating": $('input[name=rating]:checked').val(),
                 "clean": +$('#clean_cb').val(),
@@ -172,10 +180,7 @@ function showOnMap(position) {
                 "review": $('#detailreview').val(),
                 "bid": marker.b_id
               }
-              if (count > 3) {
-              $(allReviews).append('<button id="add_your" onclick="reviewForm()">Add your review</button>');
-            $(allReviews).hide();
-            }
+
 
               console.log(formData);
 
@@ -216,6 +221,6 @@ function showOnMap(position) {
 }
 function reviewForm() {
   $('#add_your').remove();
-  $('#allReviews').show();
+  $('#addReviewForm').show();
 }
 google.maps.event.addDomListener(window, 'load', initialize);
