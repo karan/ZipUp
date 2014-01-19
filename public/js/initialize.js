@@ -43,7 +43,8 @@ function showOnMap(position) {
             JSON.parse(data);
             if (data.status == "OK") {
               var distance = data.rows.elements.distance.value;*/
-              var distance = Math.sqrt(Math.pow((lat - latitude),2) - Math.pow((lng - longitude),2))
+              var distance = Math.sqrt(Math.abs(Math.pow((lat - latitude),2) - Math.pow((lng - longitude),2)));
+              console.log(distance);
               if (distance <= 500) {
                 var restRoom = new google.maps.LatLng(lat, lng);
                   var currentPosition = new google.maps.Marker({
@@ -57,6 +58,7 @@ function showOnMap(position) {
           //});
         //}
       }
-  });
+  }
+});
 }
 google.maps.event.addDomListener(window, 'load', initialize);google.maps.event.addDomListener(window, 'load', initialize);
