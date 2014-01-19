@@ -87,7 +87,7 @@ function showOnMap(position) {
             '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
             '<div id="bodyContent">' +
             '<p>Gender: ' + gender + '</p>' + /* Put restroom specific information in this message*/
-            '<button id="review">Review</button></div>';
+            '<input type="submit" class="btn" id="review" text="Review"></div>';
           nearby.html = contentString;
           markerArray.push(nearby);
 

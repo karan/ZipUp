@@ -49,7 +49,11 @@ if ('development' == app.get('env')) {
 
 app.get('/', function(req, res) {
     res.sendfile('index.html');
-}); // api home, doesn't do anything
+});
+app.get('/addBathroom', function(req, res) {
+    res.sendfile('addBathroom.html');
+}); // add new bathroom
+
 app.get('/get/bathrooms/', routes.getAll); // get all bathrooms
 app.post('/add/bathroom', routes.addBathroom); // add a new bathroom
 app.get('/b/:id', routes.getBathroom); // get details about a bathroom
