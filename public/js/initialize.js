@@ -19,13 +19,12 @@ function showOnMap(position) {
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
-  var currentPosition = new google.maps.Marker({
+  var marker = new google.maps.Marker({
     position: myLatlng,
     map: map,
     title:"You are here!"
   });
-  currentPosition.setMap(map);
-
+  
   $.get("/get/bathrooms/",function(data,status){
     //JSON.parse(data);
     for (var i = 0; i < data.bathrooms.length; i++) {
@@ -33,6 +32,9 @@ function showOnMap(position) {
         console.log(data.bathrooms[i]);
         var lat = data.bathrooms[i]["loc"].lat;
         var lng = data.bathrooms[i]["loc"].lng;
+        var name = data.bathrooms[i]["name"];
+        var gender = data.bathrooms[i]["gender"];
+
         var queryURL = "http://maps.googleapis.com/maps/api/distancematrix/json?"+
             "origins="+latitude+","+longitude+
             "&destinations="+lat+","+lng+
@@ -48,9 +50,21 @@ function showOnMap(position) {
                   var currentPosition = new google.maps.Marker({
                     position: restRoom,
                     map: map,
-                    title:"REST ROOM!"
-                  });
-                  currentPosition.setMap(map);
+                    title:"Restroom"
+                });
+                var contentString = '<div class="content">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>'+
+                '<div id="bodyContent">'+
+                '<p>Gender: ' + gender + '</p>'+ /* Put restroom specific information in this message*/
+                '</div>';
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString,
+                    maxWidth: 200
+                });
+                google.maps.event.addListener(restRoom, 'click', function() {
+                  infowindow.open(map, restRoom);
+                });
               }
             }
           });
@@ -58,4 +72,4 @@ function showOnMap(position) {
       }
   });
 }
-google.maps.event.addDomListener(window, 'load', initialize);google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', initialize);
