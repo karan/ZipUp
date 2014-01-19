@@ -16,8 +16,7 @@ var BathroomSchema = new Schema({
     floor: String,
     requirements: Number, // 0 public, 1 private, 2 purchase reqd
     unisex: Boolean,
-    stall_count: Number,
-    rating: Number
+    stall_count: Number
 });
 
 module.exports = mongoose.model('Bathroom', BathroomSchema);
