@@ -34,8 +34,6 @@ function showOnMap(position) {
         var name = data.bathrooms[i]["name"];
         var gender = data.bathrooms[i]["gender"];
 
-        var queryURL = "http://maps.googleapis.com/maps/api/distancematrix/json?"+
-
         /*var queryURL = "http://maps.googleapis.com/maps/api/distancematrix/json?"+
             "origins="+latitude+","+longitude+
             "&destinations="+lat+","+lng+
@@ -68,9 +66,7 @@ function showOnMap(position) {
                 google.maps.event.addListener(nearby, 'click', function() {
                   infowindow.open(map, nearby);
                 });
-                    title:"REST ROOM!"
-                  });
-                  nearby.setMap(map);\
+                  nearby.setMap(map);
               }
             //}
           //});
