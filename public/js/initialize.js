@@ -1,6 +1,28 @@
 var infowindow = null;
 var markerArray = [];
 var map = null;
+var newReviewForm = '<div id="review_stage" style="background-color:green;"></div>'+
+                                '<form id="addReviewForm">'+
+                                '<label for="rating">Overall rating:</label>'+
+                                  '<ul><li>'+
+                                      '<input type="radio" name="rating" value="1" /> 1</li>'+
+                                      '<li><input type="radio" name="rating" value="2" /> 2</li>'+
+                                      '<li><input type="radio" name="rating" value="3" /> 3</li>'+
+                                      '<li><input type="radio" name="rating" value="4" /> 4</li>'+
+                                      '<li><input type="radio" name="rating" value="5" /> 5'+
+                                    '</li></ul>'+
+                                ''+
+                                  '<input type="checkbox" name="clean" id="clean_cb" value="0">'+
+                                  '<label for="clean_cb">Clean</label><br>'+
+                                  '<input type="checkbox" name="smell" id="smell_cb" value="0">'+
+                                  '<label for="smell_cb">No smell</label><br>'+
+                                  '<input type="checkbox" name="amenities" id="amenities_cb" value="0">'+
+                                  '<label for="amenities_cb">Amenities stocked</label><br>'+
+                                ''+
+
+                                '<p><textarea rows="4" cols="30" id="detailreview"></textarea></p>'+
+                                '<input class="btn" type="submit" id="add_review_btn" text="Submit">'+
+                              '</form>';
 
 function initialize() {
   if (navigator.geolocation) {
@@ -127,40 +149,20 @@ function showOnMap(position) {
             $.each(data, function(){
               total += this["rating"];
               count++;
-              allReviews.append('<p class="one_review">' + this["review"] + '</p>');
+              allReviews.append('<p class="one_review">' + this["review"] + '<br><span class="rating">Rating: ' + this["rating"].toFixed(0) + '</span></p>');
             });
-            var rating = total / count;
+            var avgRating = total / count;
             if (count > 0) {
-              allReviews.prepend('<p>Average Rating: ' + rating.toFixed(1) + '</p>');
+              allReviews.prepend('<p class="avg">Average Rating: ' + avgRating.toFixed(1) + '</p>');
             } else {
-              allReviews.prepend('<p>No reviews... yet!</p>');
+              allReviews.prepend('<p class="no_reviews_yet">No reviews... yet!</p>');
             }
 
-            var newReviewForm = '<div id="review_stage" style="background-color:green;"></div>'+
-                                '<form id="addReviewForm">'+
-                                '<label for="rating">Overall rating:</label>'+
-                                  '<ul><li>'+
-                                      '<input type="radio" name="rating" value="1" /> 1</li>'+
-                                      '<li><input type="radio" name="rating" value="2" /> 2</li>'+
-                                      '<li><input type="radio" name="rating" value="3" /> 3</li>'+
-                                      '<li><input type="radio" name="rating" value="4" /> 4</li>'+
-                                      '<li><input type="radio" name="rating" value="5" /> 5'+
-                                    '</li></ul>'+
-                                ''+
-                                  '<input type="checkbox" name="clean" id="clean_cb" value="0">'+
-                                  '<label for="clean_cb">Clean</label><br>'+
-                                  '<input type="checkbox" name="smell" id="smell_cb" value="0">'+
-                                  '<label for="smell_cb">No smell</label><br>'+
-                                  '<input type="checkbox" name="amenities" id="amenities_cb" value="0">'+
-                                  '<label for="amenities_cb">Amenities stocked</label><br>'+
-                                ''+
 
-                                '<p><textarea rows="4" cols="30" id="detailreview"></textarea></p>'+
-                                '<input class="btn" type="submit" id="add_review_btn" text="Submit">'+
-                              '</form>'
-            $(allReviews).append(newReviewForm);
-              // $('input[name=rating]:checked').val()
-              // +$('#clean_cb').val()
+
+              $(allReviews).append(newReviewForm);
+
+
               $("#addReviewForm").submit(function(e) {
               var formData = {
                 "rating": $('input[name=rating]:checked').val(),
@@ -170,6 +172,10 @@ function showOnMap(position) {
                 "review": $('#detailreview').val(),
                 "bid": marker.b_id
               }
+              if (count > 3) {
+              $(allReviews).append('<button id="add_your" onclick="reviewForm()">Add your review</button>');
+            $(allReviews).hide();
+            }
 
               console.log(formData);
 
@@ -178,7 +184,26 @@ function showOnMap(position) {
                 url: "/add/review/"+marker.b_id,
                 data: formData,
                 success: function() {
-                  $('#review_stage').html('<p>Done!</p>');
+                  console.log('re render reviews');
+                  //$('#review_stage').html('<p>Done!</p>');
+                  $('#welcome').remove();
+                  $('.one_review').remove();
+                  $('#addReviewForm').remove();
+                  $('.no_reviews_yet').remove();
+                  $('.avg').remove();
+                  $.get('/get/reviews/'+marker.b_id, function(data, status) {
+                    console.log('put comments again');
+                    var allReviews = $('#allReviews');
+                    var total = 0.0;
+                    var count = 0;
+                    $.each(data, function(){
+                      total += this["rating"];
+                      count++;
+                      allReviews.append('<p class="one_review">' + this["review"] + '<br><span class="rating">Rating: ' + this["rating"].toFixed(0) + '</span></p>');
+                    });
+                    var avgRating = total / count;
+                    allReviews.prepend('<p>Average Rating: <b>' + avgRating.toFixed(1) + '</b></p>');
+                  });
                 }
               });
               return false;
@@ -188,5 +213,9 @@ function showOnMap(position) {
       })(marker));
     }
   });
+}
+function reviewForm() {
+  $('#add_your').remove();
+  $('#allReviews').show();
 }
 google.maps.event.addDomListener(window, 'load', initialize);
