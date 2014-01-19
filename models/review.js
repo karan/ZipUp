@@ -14,7 +14,7 @@ var ReviewSchema = new Schema({
     wait_time: Number, // minutes
     title: String, // title of review
     review: String, // body of review
-    bathroom: String
+    bathroom: String // id of the bathroom
 });
 
 module.exports = mongoose.model('Review', ReviewSchema);

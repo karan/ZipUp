@@ -1,7 +1,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-
 var BathroomSchema = new Schema({
     added_at: {
         // auto added timestamp for creation of bathroom entry
