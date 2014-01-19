@@ -2,18 +2,20 @@
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <style type="text/css" href="style/style.css" rel="stylesheet" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% }
+    </style>
+    <title> ZIP UP </title>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3clVyH1hk4gVznz4GfXv-gV0_ciXwv_w&sensor=true">
     </script>
-    <script type="text/javascript" src="js/script.js"/>
+    <script type="text/javascript" src="public/js/initialize.js">
+
+    </script>
   </head>
   <body>
-    <div id="title">
-    <h1>ZipUp</h1>
-    <h3>Bathroom Finder</h3>
-    </div>
     <div id="map-canvas"/>
-    <div id="sidebar"></div>
   </body>
 </html>
