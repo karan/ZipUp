@@ -122,7 +122,8 @@ function showOnMap(position) {
             '<h3 class="firstHeading">' + name + '</h3>' +
             '<div id="bodyContent">' +
             '<p>Gender: ' + gender + '<br/>' + /* Put restroom specific information in this message*/
-            'Type: ' + type + '</p></div></div>';
+            'Type: ' + type + '<br/>' +
+            'Distance: ' + distance.toFixed(0) + 'm </p></div></div>';
           nearby.html = contentString;
           nearby.b_id = b_id;
           nearby.b_data = data.bathrooms[i];
