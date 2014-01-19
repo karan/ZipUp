@@ -7,13 +7,18 @@ Helping your business go down. Will be deployed on the interwebz when we work to
 
 ### Stack
 
-- **Backend**: node, express
+- **Backend**: node, express, mongodb
 - **Frontend**: jQuery
 
 ### Running locally
 
-`npm install`
-`node app.js`
+Make sure you have mongodb installed.
+
+(`cd` into `ZipUp` directory.)
+
+    npm install
+    mongod --dbpath data/
+    node app.js
 
 
 ### API methods:
