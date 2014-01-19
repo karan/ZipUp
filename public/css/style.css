@@ -11,3 +11,6 @@
  h1, h3 {
  	position: fixed;
  }
+ .content {
+ 	width: 100px;
+ }

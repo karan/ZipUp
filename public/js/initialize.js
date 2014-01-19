@@ -28,7 +28,6 @@ function deg2rad(deg) {
 }
 
 function showOnMap(position) {
-
   var pinColor = "EEEEEE";
   var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
     new google.maps.Size(21, 34),
@@ -38,7 +37,6 @@ function showOnMap(position) {
     new google.maps.Size(40, 37),
     new google.maps.Point(0, 0),
     new google.maps.Point(12, 35));
-
 
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
@@ -50,50 +48,48 @@ function showOnMap(position) {
   };
   var map = new google.maps.Map(document.getElementById("map_canvas"),
       mapOptions);
-  var currentPosition = new google.maps.Marker({
+  var marker = new google.maps.Marker({
     position: myLatlng,
     map: map,
     title:"You are here!",
     icon: pinImage,
     shadow: pinShadow
   });
-  console.log(myLatlng);
-  //currentPosition.setMap(map);
 
   $.get("/get/bathrooms/",function(data,status){
-    //JSON.parse(data);
-
-    var infowindow = new google.maps.InfoWindow();
-
-    var marker, i;
-
-    for (var db_loc = 0; db_loc < data.bathrooms.length; db_loc++) {
-      if (data.bathrooms[db_loc]["loc"] != undefined) {
-        var lat = data.bathrooms[db_loc]["loc"].lat;
-        var lng = data.bathrooms[db_loc]["loc"].lng;
+    for (var i = 0; i < data.bathrooms.length; i++) {
+      if (data.bathrooms[i]["loc"] != undefined) {
+        console.log(data.bathrooms[i]);
+        var lat = data.bathrooms[i]["loc"].lat;
+        var lng = data.bathrooms[i]["loc"].lng;
+        var name = data.bathrooms[i]["name"];
+        var gender = data.bathrooms[i]["gender"];
 
         var distance = getDistanceFromLatLonInKm(latitude, longitude, lat, lng) * 1000;
-
-        console.log(distance);
         if (distance <= 500) {
           var restRoom = new google.maps.LatLng(lat, lng);
-          marker = new google.maps.Marker({
-            position: restRoom,
-            map: map
-            //title: data.bathrooms[i].name
+            var nearby = new google.maps.Marker({
+              position: restRoom,
+              map: map,
+              title:"Restroom"
           });
-          console.log(restRoom);
-
-        google.maps.event.addListener(marker, 'click', (function(marker, db_loc) {
-          return function() {
-            //infowindow.setContent(locations[db_loc][0]);
-            infowindow.open(map, marker);
-          }
-        })(marker, db_loc));
-          //nearby.setMap(map);
+          var contentString = '<div class="content">'+
+                              '</div>'+
+                              '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>'+
+                              '<div id="bodyContent">'+
+                              '<p>Gender: ' + gender + '</p>'+ /* Put restroom specific information in this message*/
+                              '<button id="review">Review</button></div>';
+          var infowindow = new google.maps.InfoWindow({
+              content: contentString,
+              maxWidth: 200
+          });
+          google.maps.event.addListener(nearby, 'click', function() {
+            infowindow.open(map, nearby);
+          });
+            //nearby.setMap(map);
         }
       }
     }
   });
 }
-google.maps.event.addDomListener(window, 'load', initialize);google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', initialize);

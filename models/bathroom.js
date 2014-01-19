@@ -15,7 +15,7 @@ var BathroomSchema = new Schema({
     name: String,
     floor: String,
     requirements: Number, // 0 public, 1 private, 2 purchase reqd
-    unisex: Boolean,
+    gender: Number, // 0 male, 1 female, 2 unisex
     stall_count: Number
 });
 
