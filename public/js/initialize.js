@@ -21,7 +21,6 @@ function showOnMap(position) {
       mapOptions);
   var marker = new google.maps.Marker({
     position: myLatlng,
-    map: map,
     title:"You are here!"
   });
   
@@ -36,6 +35,8 @@ function showOnMap(position) {
         var gender = data.bathrooms[i]["gender"];
 
         var queryURL = "http://maps.googleapis.com/maps/api/distancematrix/json?"+
+
+        /*var queryURL = "http://maps.googleapis.com/maps/api/distancematrix/json?"+
             "origins="+latitude+","+longitude+
             "&destinations="+lat+","+lng+
             "&mode="+"walking"+
@@ -44,10 +45,12 @@ function showOnMap(position) {
         $.get(queryURL, function(data,status){
             JSON.parse(data);
             if (data.status == "OK") {
-              var distance = data.rows.elements.distance.value;
+              var distance = data.rows.elements.distance.value;*/
+              var distance = Math.sqrt(Math.abs(Math.pow((lat - latitude),2) - Math.pow((lng - longitude),2)));
+              console.log(distance);
               if (distance <= 500) {
                 var restRoom = new google.maps.LatLng(lat, lng);
-                  var currentPosition = new google.maps.Marker({
+                  var nearby = new google.maps.Marker({
                     position: restRoom,
                     map: map,
                     title:"Restroom"
@@ -62,14 +65,18 @@ function showOnMap(position) {
                     content: contentString,
                     maxWidth: 200
                 });
-                google.maps.event.addListener(restRoom, 'click', function() {
-                  infowindow.open(map, restRoom);
+                google.maps.event.addListener(nearby, 'click', function() {
+                  infowindow.open(map, nearby);
                 });
+                    title:"REST ROOM!"
+                  });
+                  nearby.setMap(map);\
               }
-            }
-          });
-        }
+            //}
+          //});
+        //}
       }
+    }
   });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
