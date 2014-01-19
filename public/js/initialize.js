@@ -19,9 +19,19 @@ function showOnMap(position) {
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
+  var image = {
+    url: 'images/circle.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(20, 32),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 32)
+  };
   var marker = new google.maps.Marker({
     position: myLatlng,
-    title:"You are here!"
+    title:"You are here!",
+    icon: image
   });
   
   $.get("/get/bathrooms/",function(data,status){
@@ -58,7 +68,7 @@ function showOnMap(position) {
                 '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>'+
                 '<div id="bodyContent">'+
                 '<p>Gender: ' + gender + '</p>'+ /* Put restroom specific information in this message*/
-                '</div>';
+                '<button id="review">Review</button></div>';
                 var infowindow = new google.maps.InfoWindow({
                     content: contentString,
                     maxWidth: 200
