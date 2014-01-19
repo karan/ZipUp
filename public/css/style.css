@@ -14,3 +14,20 @@
  .content {
  	width: 100px;
  }
+
+ .sidebar {
+ 	height: 60%;
+ 	width: 20%;
+ 	float: right;
+ 	margin-top: 20px;
+ 	margin-right: 10px;
+ 	padding: 10px;
+ 	background-clip: padding-box;
+	background-color: rgba(0,0,0,.3);
+	border: 5px solid transparent;
+	border-radius: 10px;
+	min-height: 20px;
+	min-width: 20px;
+	height: 5px;
+	width: 5px;
+ }
