@@ -17,7 +17,8 @@ $(document).ready(function() {
       url: "/add/bathroom",
       data: formData,
       success: function() {
-        $('#stage').html('<p>Done!</p>');
+        //$('#stage').html('<p>Done!</p>');
+        window.location.href = "/";
       }
     });
     return false;
