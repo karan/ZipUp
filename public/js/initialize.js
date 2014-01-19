@@ -69,28 +69,41 @@ function showOnMap(position) {
         var lat = data.bathrooms[i]["loc"].lat;
         var lng = data.bathrooms[i]["loc"].lng;
         var name = data.bathrooms[i]["name"];
-        var gender = data.bathrooms[i]["gender"];
-
+        var genderNum = data.bathrooms[i]["gender"];
+        var gender;
+        var typeNum = data.bathrooms[i]["requirements"];
+        var type;
+        if (genderNum == 0) {
+          gender = "Men's";
+        } else if (genderNum == 1) {
+          gender = "Women's";
+        } else {
+          gender = "Unisex";
+        }
+        if (typeNum == 0) {
+          type = "Public";
+        } else if (typeNum == 1) {
+          type = "Private";
+        } else {
+          type = "Customers Only";
+        }
         var distance = getDistanceFromLatLonInKm(latitude, longitude, lat, lng) * 1000;
         if (distance <= 500) {
           var restRoom = new google.maps.LatLng(lat, lng);
-
           var nearby = new google.maps.Marker({
             position: restRoom,
             map: map,
             title: name
           });
-
-
           var contentString = '<div class="content">' +
             '</div>' +
-            '<h1 id="firstHeading" class="firstHeading">' + name + '</h1>' +
+            '<h3 class="firstHeading">' + name + '</h3>' +
             '<div id="bodyContent">' +
-            '<p>Gender: ' + gender + '</p>' + /* Put restroom specific information in this message*/
+            '<p>Gender: ' + gender + '<br/>' + /* Put restroom specific information in this message*/
+            'Type: ' + type + '</p>' +
             '<input type="submit" class="btn" id="review" text="Review"></div>';
           nearby.html = contentString;
           markerArray.push(nearby);
-
         }
       }
     }
@@ -101,7 +114,6 @@ function showOnMap(position) {
           infowindow.setContent(marker.html);
           infowindow.open(map, marker);
         }
-
       })(marker));
     }
   });
