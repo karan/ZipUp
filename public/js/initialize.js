@@ -47,18 +47,19 @@ function showOnMap(position) {
               console.log(distance);
               if (distance <= 500) {
                 var restRoom = new google.maps.LatLng(lat, lng);
-                  var currentPosition = new google.maps.Marker({
+                  var nearby = new google.maps.Marker({
                     position: restRoom,
                     map: map,
                     title:"REST ROOM!"
                   });
-                  currentPosition.setMap(map);
+                  nearby.setMap(map);
+                  console.log("SET!!");
               }
             //}
           //});
         //}
       }
-  }
-});
+    }
+  });
 }
 google.maps.event.addDomListener(window, 'load', initialize);google.maps.event.addDomListener(window, 'load', initialize);
