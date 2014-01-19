@@ -33,7 +33,7 @@ function showOnMap(position) {
         console.log(data.bathrooms[i]);
         var lat = data.bathrooms[i]["loc"].lat;
         var lng = data.bathrooms[i]["loc"].lng;
-        var queryURL = "http://maps.googleapis.com/maps/api/distancematrix/json?"+
+        /*var queryURL = "http://maps.googleapis.com/maps/api/distancematrix/json?"+
             "origins="+latitude+","+longitude+
             "&destinations="+lat+","+lng+
             "&mode="+"walking"+
@@ -42,7 +42,8 @@ function showOnMap(position) {
         $.get(queryURL, function(data,status){
             JSON.parse(data);
             if (data.status == "OK") {
-              var distance = data.rows.elements.distance.value;
+              var distance = data.rows.elements.distance.value;*/
+              var distance = Math.sqrt(Math.pow((lat - latitude),2) - Math.pow((lng - longitude),2))
               if (distance <= 500) {
                 var restRoom = new google.maps.LatLng(lat, lng);
                   var currentPosition = new google.maps.Marker({
