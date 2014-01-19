@@ -17,5 +17,8 @@ return specific bathroom details
 `/get/reviews/:id`
 returns reviews of the bathroom
 
-`/post/:id`
-post a review
+`/add/review/:id`
+post a review to id bathroom
+
+`/add/bathroom`
+Add a new bathroom

@@ -1,29 +1,22 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
-var userSchema = new Schema({
-    created_at: {
-        // auto added user registration timestamp
+
+var BathroomSchema = new Schema({
+    added_at: {
+        // auto added timestamp for creation of bathroom entry
         type: Date,
         default: Date.now
     },
-    username: {
-        type: String,
-        //required: '{PATH} is required!', not mandetory yet
-        validate: nameValidator
+    loc: {
+        "lat": Number,
+        "lng": Number
     },
-    email: {
-        type: String,
-        //required: '{PATH} is required!', twitter doesn't allow this
-        lowercase: true, // force email lowercase
-        validate: emailValidator
-    },
-    password: {
-        type: String,
-        //required: '{PATH} is required!', only required for local
-        validate: passwordValidator
-    },
-    twId: String,
-    openId: String,
-    fbId: String,
-    strategy: String
+    name: String,
+    floor: String,
+    requirements: Number, // 0 public, 1 private, 2 purchase reqd
+    unisex: Boolean,
+    stall_count: Number
 });
+
+module.exports = mongoose.model('Bathroom', BathroomSchema);

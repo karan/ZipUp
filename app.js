@@ -3,18 +3,12 @@
 */
 
 var express = require('express'),       // the main ssjs framework
-    routes = require('./routes'),       // by default, brings in routes/index.js
     path = require('path'),             // for path manipulation
     mongoose = require('mongoose'),
-    bathroom = require('./../models/bathroom'),
-    review = require('./../models/review');
     app = express();                    // create an express app
 
-var dbURI = 'mongodb://localhost/zipup';
-mongoose.connect(dbURI);
-mongoose.connection.on('connected', function() {
-    console.log('Connected to db ' + dbURI);
-});
+var db = require('./db');
+var routes = require('./routes');       // by default, brings in routes/index.js
 
 /*
     Configure environments
@@ -38,10 +32,12 @@ if ('development' == app.get('env')) {
     URL routes
 */
 
-// homepage
-app.get('/', function (req, res) {
-    res.send('API is running');
-});
+app.get('/', routes.index); // api home, doesn't do anything
+app.get('/get/bathrooms/', routes.getAll); // get all bathrooms
+app.post('/add/bathroom', routes.addBathroom); // add a new bathroom
+app.get('/b/:id', routes.getBathroom); // get details about a bathroom
+
+app.post('/add/review/:id', routes.addReview); // post a new review at a post
 
 app.listen(8888);
 

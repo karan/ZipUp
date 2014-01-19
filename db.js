@@ -29,5 +29,5 @@ process.on('SIGINT', function() {
 });
 
 // bring in all models
-require('./../models/bathroom');
-require('./../models/review');
+require('./models/bathroom');
+require('./models/review');
