@@ -96,10 +96,13 @@ function showOnMap(position) {
     }
     for (var i = 0; i < markerArray.length; i++) {
       var marker = markerArray[i];
-      google.maps.event.addListener(marker, 'click', function () {
-        infowindow.setContent(this.html);
-        infowindow.open(map, this);
-      });
+      google.maps.event.addListener(marker, 'click', (function (marker) {
+        return function() {
+          infowindow.setContent(marker.html);
+          infowindow.open(map, marker);
+        }
+        
+      })(marker);
     }
   });
 }
