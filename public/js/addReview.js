@@ -2,7 +2,7 @@ $(document).ready(function(){
   $("#review").click(function(){
     var id = this.id;
     var url = "/get/reviews/"+url;
-    $("sidebar").addClass("sidebar");
+    $("#sidebar").addClass("sidebar");
     $.GET(url,function(data,status) {
 			for (var reviewNum = 0; reviewNum < data.length; reviewNum++) {
 				var review = document.createElement("p");
@@ -23,7 +23,7 @@ $(document).ready(function(){
 				review.append(body);
 			}
 		}
-		
+
 	});
   function generateRatings(name, title) {
 		var lable = document.createElement("lable");

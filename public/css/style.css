@@ -27,7 +27,7 @@ form#add_bathroom input, form#add_bathroom select {
     margin: 10px;
 }
 
-input.btn {
+button, input.btn {
     color: #fff;
     background-color: #5cb85c;
     border-color: #4cae4c;
