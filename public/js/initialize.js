@@ -53,9 +53,9 @@ function showOnMap(position) {
                   });
                   currentPosition.setMap(map);
               }
-            }
-          });
-        }
+            //}
+          //});
+        //}
       }
   });
 }
