@@ -1,13 +1,22 @@
 ZipUp
 =====
 
-###Yelp for bathrooms..
+### Yelp for bathrooms..
 
-Helping your business go down.
+Helping your business go down. Will be deployed on the interwebz when we work to make it less hacky.
 
-Coming soon to a browser near you.
+### Stack
+
+- **Backend**: node, express
+- **Frontend**: jQuery
+
+### Running locally
+
+`npm install`
+`node app.js`
 
 
+### API methods:
 `/get/bathrooms/`
 return all bathrooms in db (uuhhhhh)!!!!
 
@@ -16,8 +25,6 @@ return specific bathroom details
 
 `/add/bathroom`
 Add a new bathroom
-
-
 
 `/get/reviews/:id`
 returns reviews of the bathroom
