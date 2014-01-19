@@ -21,7 +21,6 @@ function showOnMap(position) {
       mapOptions);
   var currentPosition = new google.maps.Marker({
     position: myLatlng,
-    map: map,
     title:"You are here!"
   });
   currentPosition.setMap(map);
@@ -49,11 +48,9 @@ function showOnMap(position) {
                 var restRoom = new google.maps.LatLng(lat, lng);
                   var nearby = new google.maps.Marker({
                     position: restRoom,
-                    map: map,
                     title:"REST ROOM!"
                   });
                   nearby.setMap(map);
-                  console.log("SET!!");
               }
             //}
           //});
