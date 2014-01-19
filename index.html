@@ -2,90 +2,22 @@
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" media="all" href="public/css/style.css">
+    <link rel="stylesheet" media="all" href="css/style.css">
     <title>ZipUp - Find a clean bathroom near you...</title>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3clVyH1hk4gVznz4GfXv-gV0_ciXwv_w&sensor=false">
     </script>
-    <script type="text/javascript" src="public/js/initialize.js"></script>
-    <script src="public/js/jquery.min.js"></script>
-    <script src="public/js/sideBar.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/initialize.js"></script>
   </head>
   <body>
     <div id="map_canvas"/></div>
-    <div id="sidebar">
-    <p id="allReviews">
-
-
-       <p id = "writeRating">
-        <h3> Rating: </h3>
-        <div class="starsContainer inlineBlock">
-            <div class="starSprite bigStar inlineBlock clickable rating_1 yellowStar">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_1 yellowStar">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_2">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_2">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_3">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_3">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_4">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_4">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_5">&nbsp;</div>
-        </div>
-      </p>
-
-      <p id = "writeCleanliness">
-        <h3> Cleanliness </h3>
-
-        <div class="starsContainer inlineBlock">
-            <div class="starSprite bigStar inlineBlock clickable rating_1 yellowStar">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_1 yellowStar">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_2">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_2">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_3">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_3">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_4">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_4">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_5">&nbsp;</div>
-        </div>
-        <h3> (Optional) </h3>
-      </p>
-
-      <p id = "writeAuroma">
-        <h3> Auroma: </h3>
-        <div class="starsContainer inlineBlock">
-            <div class="starSprite bigStar inlineBlock clickable rating_1 yellowStar">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_1 yellowStar">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_2">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_2">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_3">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_3">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_4">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_4">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_5">&nbsp;</div>
-        </div>
-        <h3> (Optional) </h3>
-      </p>
-
-       <p id = "writeAmenities">
-        <h3> Amenities: </h3>
-        <div class="starsContainer inlineBlock">
-            <div class="starSprite bigStar inlineBlock clickable rating_1 yellowStar">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_1 yellowStar">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_2">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_2">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_3">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_3">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_4">&nbsp;</div>
-            <div class="starPadding inlineBlock clickable rating_4">&nbsp;</div>
-            <div class="starSprite bigStar inlineBlock clickable rating_5">&nbsp;</div>
-        </div>
-        <h3> (Optional) </h3>
-      </p>
-
-      <p id = "wait_time">
-
-      <P>
-      <!-- Sry AMAZON, I bought a lot on your site. -->
-    </p>
+    <div class="sidebar">
+      <h1>ZipUp</h1>
+      <p><a href="/addBathroom">Add New Bathroom</a></p>
+      <div id="allReviews">
+      </div>
     </div>
+
   </body>
 </html>

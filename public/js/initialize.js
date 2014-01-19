@@ -73,6 +73,7 @@ function showOnMap(position) {
         var gender;
         var typeNum = data.bathrooms[i]["requirements"];
         var type;
+        var b_id = data.bathrooms[i]["_id"];
         if (genderNum == 0) {
           gender = "Men's";
         } else if (genderNum == 1) {
@@ -96,13 +97,12 @@ function showOnMap(position) {
             title: name
           });
           var contentString = '<div class="content">' +
-            '</div>' +
             '<h3 class="firstHeading">' + name + '</h3>' +
             '<div id="bodyContent">' +
             '<p>Gender: ' + gender + '<br/>' + /* Put restroom specific information in this message*/
-            'Type: ' + type + '</p>' +
-            '<button class="btn" id="review">Review</button></div>';
+            'Type: ' + type + '</p></div></div>';
           nearby.html = contentString;
+          nearby.b_id = b_id;
           markerArray.push(nearby);
         }
       }
@@ -111,8 +111,20 @@ function showOnMap(position) {
       var marker = markerArray[i];
       google.maps.event.addListener(marker, 'click', (function (marker) {
         return function() {
+          $('.one_review').remove();
           infowindow.setContent(marker.html);
           infowindow.open(map, marker);
+          console.log(marker.b_id);
+          $.get('/get/reviews/'+marker.b_id, function(data, status) {
+            //for (var reviewNum = 0; reviewNum < data.length; reviewNum++) {
+              //var review = data[reviewNum];
+              //console.log(review["review"]);
+              var allReviews = $('#allReviews');
+              $.each(data, function(){
+                allReviews.append('<p class="one_review">' + this["review"] + '</p>');
+              });
+            //}
+          })
         }
       })(marker));
     }
