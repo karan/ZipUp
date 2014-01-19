@@ -10,9 +10,10 @@ function showOnMap(position) {
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
   var myLatlng = new google.maps.LatLng(latitude, longitude);
+  var location = latitude + "," + longitude; 
   var mapOptions = {
     center: myLatlng,
-    zoom: 15
+    zoom: 20
   };
   var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
