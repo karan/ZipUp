@@ -15,6 +15,7 @@ var routes = require('./routes');       // by default, brings in routes/index.js
 */
 
 app.configure(function(){
+    app.set('port', process.env.PORT || 3000);
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(app.router);
@@ -61,6 +62,6 @@ app.get('/b/:id', routes.getBathroom); // get details about a bathroom
 app.post('/add/review/:bid', routes.addReview); // post a new review at a post
 app.get('/get/reviews/:bid', routes.getReviews); // get reviews for a bathroom
 
-app.listen(8888);
 
-console.log('Express server listening on port 8888');
+app.listen(app.get('port'));
+console.log('Express server listening on port ' + app.get('port'));
