@@ -16,8 +16,13 @@
 
  #add {
     position: absolute;
-    bottom: 5px;
-    margin-left: 86px;
+	bottom: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	width: 200px;
+	text-align: center;
  }
 
  .li {display:inline}
@@ -158,7 +163,7 @@ a img {
 }
 
 #allReviews {
-    overflow: scroll;
+    overflow-y: scroll;
     max-height: 470px;
 }
 .rating {
