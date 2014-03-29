@@ -20,7 +20,7 @@ var newReviewForm = '<div id="review_stage" style="background-color:green;"></di
                                   '<label for="amenities_cb">Amenities stocked</label><br>'+
                                 ''+
 
-                                '<p><textarea rows="4" cols="30" id="detailreview" required></textarea></p>'+
+                                '<p><textarea rows="4" cols="30" id="detailreview" placeholder="How was it?" required></textarea></p>'+
                                 '<input class="btn" type="submit" id="add_review_btn" text="Submit">'+
                               '</form>';
 
