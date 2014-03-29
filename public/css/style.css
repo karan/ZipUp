@@ -164,7 +164,8 @@ a img {
 
 #allReviews {
     overflow-y: scroll;
-    max-height: 470px;
+    overflow: auto;
+    max-height: 78%;
 }
 .rating {
     font-size: 11px;
