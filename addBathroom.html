@@ -6,10 +6,11 @@
     <title>ZipUp - Find a clean bathroom near you...</title>
   </head>
   <body>
-    <div id="add_map_canvas" style="height:350px"></div>
-    <div>
-      <div id="stage" style="background-color:green;"></div>
+  <div id="stage" style="background-color:green;">Bathroom added!</div>
+    <div id="add_map_canvas"></div>
+    <div class="sidebar" >
       <form id="add_bathroom">
+        <h1>Add New Bathroom</h1>
         <input type="text" id="add_lat" disabled="true" placeholder="Click on map" required>
         <input type="text" id="add_lon" disabled="true" placeholder="Click on map" required><br>
         <input type="text" id="b_name" placeholder="Name of building/place" required><br>
@@ -28,6 +29,8 @@
         <input type="text" id="stalls" placeholder="Number of stalls" required><br>
         <input class="btn" type="submit" id="add_bathroom_btn" text="Submit">
       </form>
+
+        <p><a href="/"><button id="add">Return to Map</button></a></p>
     <div>
 
       <script type="text/javascript"

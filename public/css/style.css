@@ -8,14 +8,11 @@
     font-weight: 100;
     color: #6F6F6F;
  }
- #map_canvas {
+ #map_canvas, #add_map_canvas {
     width: 100%;
  	height: 100%
  }
 
- #add_map_canvas {
-    height: 40%;
- }
 
  #add {
     position: absolute;
@@ -25,9 +22,6 @@
 
  .li {display:inline}
 
-form#add_bathroom {
-    padding: 20px;
-}
 
 form#add_bathroom input, form#add_bathroom select {
     padding: 5px;
@@ -75,6 +69,10 @@ button, input.btn {
 	top: 10px;
 	z-index: 10;
     padding: 15px;
+ }
+ .sidebar form {
+ 	padding: 0px;
+ 	margin: 0px;
  }
  li {
     display: inline;
@@ -172,4 +170,12 @@ a img {
 border: 1px solid #ddd;
 border-radius: 5px;
 padding: 10px;
+}
+#stage {
+	height: 0px;
+	transition: height 2s;
+	-webkit-transition: height 2s;
+	color: white;
+	text-align: center;
+	font-size: 20pt;
 }

@@ -53,7 +53,7 @@ app.get('/', function(req, res) {
 });
 app.get('/addBathroom', function(req, res) {
     res.sendfile('addBathroom.html');
-}); // add new bathroom
+}); // Page to add new bathrooms
 
 app.get('/get/bathrooms/', routes.getAll); // get all bathrooms
 app.post('/add/bathroom', routes.addBathroom); // add a new bathroom
